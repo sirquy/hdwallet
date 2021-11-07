@@ -1,4 +1,12 @@
 {
+  "name": "hdwallet",
+  "version": "1.0.0",
+  "description": "ERC20 & BEP20 & Polygon & TRC20 HD Wallet",
+  "author": "Quy Nguyen",
+  "private": true,
+  "scripts": {
+    "start": "node index"
+  },
   "type": "module",
   "dependencies": {
     "bip39": "^3.0.4",
