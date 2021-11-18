@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "elliptic": "^6.5.4",
+    "ethereumjs-wallet": "^1.0.2",
     "ethers": "^5.4",
     "express": "^4.17.1",
     "hdkey": "^2.0.1",
