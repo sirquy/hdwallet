@@ -22,10 +22,7 @@ import bip39 from "bip39";
 import ethereumjs from 'ethereumjs-tx';
 const Tx = ethereumjs.Transaction;
 import Web3 from 'web3';
-<<<<<<< HEAD
-=======
 import { BigNumber } from 'ethers';
->>>>>>> 1aaf8f94f685ab2d1dbf2c93720466ddd053a6fc
 var web3 = new Web3(new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org'));
 
 const version = process.env.API_VERSION || 'v1';
@@ -143,69 +140,6 @@ app.get('/api/'+version+'/forward/:index?', async (req, res) => {
         res.json(err);
     }
 });
-<<<<<<< HEAD
-=======
-
-app.get('/api/'+version+'/transaction/:blockchain/:amount/:address?', async (req, res) => {
-    
-    let address = req.params.address;
-    let amount = parseFloat(req.params.amount);
-    let blockchain = (req.params.blockchain).toUpperCase();
-
-    // console.log(web3.utils.numberToHex(amount * Math.pow(10, 18)));
-    // return;
-    try {
-        switch(blockchain) {
-            // case 'TRX':
-            //     const masterHdkey = THDNode.fromMasterSeed(seed);
-            //     path = `m/44'/195'/0'/0/${index}`;
-            //     const hdKey = masterHdkey.derive(path)
-            //     const accountData = accounts.generateAccountFromPriKeyBytes(hdKey.privateKey);
-            //     res.json(accountData);
-            // break;
-            case 'BSC':
-                const account = await web3.eth.accounts.privateKeyToAccount(process.env.COINBASE_PRIVATE_KEY.toString('hex'));
-                const gasPrice = await web3.eth.getGasPrice();
-                const nonce = await web3.eth.getTransactionCount(account.address, 'pending');
-                let abi = [{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[],"name":"_decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"mint","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}];
-                let contract_address = "0x55d398326f99059ff775485246999027b3197955";
-                const contract = await new web3.eth.Contract(abi, contract_address, {
-                    from: account.address
-                });
-                // let amount = await contract.methods.balanceOf(account.address).call();
-                var data = await contract.methods.transfer(address, web3.utils.numberToHex(amount * Math.pow(10, 18))).encodeABI();
-                if(amount > 0) {
-                    const signedTx = await web3.eth.accounts.signTransaction({
-                        from: account.address,
-                        to: contract_address,
-                        gas: web3.utils.toHex(100000),
-                        gasPrice: web3.utils.toHex(gasPrice),
-                        data: data,
-                        nonce: web3.utils.toHex(nonce),
-                    }, '0x'+process.env.COINBASE_PRIVATE_KEY);
-                    // tx.sign(private_key);
-                    // const serializedTx = tx.serialize();
-                    await web3.eth.sendSignedTransaction(signedTx.rawTransaction, function(error, hash) {
-                        if (!error) {
-                            res.json({hash});
-                        } else {
-                            if(error.data === null) {
-                                add_gas(account.address);
-                            }
-                            res.json({error})
-                        }
-                    })
-                }
-            break;
-            default:
-                
-            break;
-        }
-    } catch(e) {
-        res.json({msg: "Has an error"});
-    }
-});
->>>>>>> 1aaf8f94f685ab2d1dbf2c93720466ddd053a6fc
 
 app.get('/*', (req, res) => {
     res.json({
